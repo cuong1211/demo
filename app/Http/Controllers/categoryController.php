@@ -32,8 +32,9 @@ class categoryController extends Controller
         return view('add');
     }
 
-    public function postadd(request $request){
-
+    public function postadd(Request $request){
+        dd($request->all());
+        die;
         category::create($request->all());
         return redirect()->route('cate');
 
