@@ -33,9 +33,8 @@ class categoryController extends Controller
     }
 
     public function postadd(Request $request){
-        dd($request->all());
-        die;
-        category::create($request->all());
+
+        category::create($_POST);
         return redirect()->route('cate');
 
     }
