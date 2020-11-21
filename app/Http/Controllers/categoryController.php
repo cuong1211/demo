@@ -2,7 +2,7 @@
 namespace app\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\models\category;
-use illuminate\http\Request;
+use Illuminate\Http\Request;
 
 
 
@@ -19,8 +19,13 @@ class categoryController extends Controller
 
     public function edit($id){
         $model = category::find($id);
-        dd($model);
-        return view('edit');
+        return view('edit',['model'=>$model]);
+    }
+
+    public function postedit($id, Request $request){
+        $request->offsetUnset('_token');
+        category::where('id',$id)->update($request->all());
+        return redirect()->route('cate');
     }
 
     public function del($id){
@@ -33,8 +38,7 @@ class categoryController extends Controller
     }
 
     public function postadd(Request $request){
-
-        category::create($_POST);
+        category::create($request->all());
         return redirect()->route('cate');
 
     }
